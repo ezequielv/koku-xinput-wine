@@ -46,6 +46,10 @@ if (BUILD_LIBRARY)
       -Wno-attributes -Wno-ignored-attributes -Wno-subobject-linkage
       -Wno-unused-parameter -Wno-unused-variable)
 
+    # fixes issue when building with x86_64-w64-mingw32-g++ (GCC) 9.3-win32 20200320 (ubuntu-20.04)
+    set_source_files_properties(device.cpp
+      PROPERTIES COMPILE_OPTIONS -fpermissive)
+
     if (BUILD_32BIT_LIBRARY)
       add_library(koku-xinput-wine SHARED ${KOKU_SOURCE_FILES})
       target_include_directories(koku-xinput-wine PRIVATE ${KOKU_INCLUDE_DIRS})
